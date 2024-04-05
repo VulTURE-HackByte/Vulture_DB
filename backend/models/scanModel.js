@@ -13,10 +13,12 @@ const scanSchema = mongoose.Schema(
         ref: "User",
       },
     spyderRes: {
-      type: [String],
+      type: {String},
+      default: null,
     },
     passiveRes: {
         type: [passiveScanSubSchema],
+        default: null,
     },
   },
   {

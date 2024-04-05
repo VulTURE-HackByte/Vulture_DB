@@ -8,13 +8,19 @@ const axios = require("axios");
 // route /api/scan/spyder
 // public
 const getSpyderScans = asyncHandler(async (req, res) => {
-  const zapSpyderURL = ""; // use zap url
+  const zapSpyderURL = ""; // use zap spyder urls
 
   axios
     .get(zapSpyderURL)
-    .then((response) => {
+    .then(async (response) => {
       const scanSypderRes = response.data;
-      console.log("Data:", response.data);
+
+      const spyder = await Scans.create({
+        user: req.user._id,
+        spyderRes: scanSypderRes.result,
+      });
+
+      res.json(spyder).status(200);
     })
     .catch((error) => {
       console.error("Error fetching data:", error);
@@ -22,22 +28,43 @@ const getSpyderScans = asyncHandler(async (req, res) => {
 });
 
 
-
-
 // get passive scan
 // route /api/scan/passive
 // public
 const getPassiveScans = asyncHandler(async (req, res) => {
-    const zapPassiveURL = ""; // use zap url
-  
-    axios
-      .get(zapPassiveURL)
-      .then((response) => {
-        const scanPassiveRes = response.data;
-        console.log("Data:", response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
+  const zapPassiveURL = ""; // use zap passive url
+
+  axios
+    .get(zapPassiveURL)
+    .then(async (response) => {
+      const scanPassiveRes = [];
+    
+      const filterResponse = () => {
+        response.data.alerts.forEach((element) => {
+          let obj = {
+            name: element.name,
+            risk: element.risk,
+            confidence: element.confidence,
+          };
+
+          scanPassiveRes.push(obj);
+        });
+
+        return scanPassiveRes;
+      };
+
+      filterResponse();
+
+      const passive = await Scans.create({
+        user: req.user._id,
+        passiveRes: scanPassiveRes,
       });
-  });
-  
+
+      res.json(passive).status(200);
+    })
+    .catch((error) => {
+      console.error("Error fetching data:", error);
+    });
+});
+
+module.exports={getSpyderScans, getPassiveScans}
