@@ -13,7 +13,7 @@ connectDb();
 const port = process.env.PORT || 5000;
 
 app.use("/api/scan", require("./routes/scanRoutes"));
-
+app.use("/api/generate", require("./routes/generateRoutes"));
 app.listen(port, () => {
   console.log(`server started on port ${port}`);
 });
