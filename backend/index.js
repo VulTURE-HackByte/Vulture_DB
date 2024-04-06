@@ -4,17 +4,19 @@ const dotenv = require("dotenv").config();
 const cors = require("cors");
 const connectDb = require("./config/db");
 
-const corsOptions = {
-  origin: "https://localhost:5173", 
-  credentials: true
-};
-app.use(cors(corsOptions));
+// const corsOptions = {
+//   origin: "https://localhost:5173/", 
+//   credentials: true,
+//   optionSuccessStatus:200
+// };
+
+app.use(cors({ origin: 'http://localhost:5173', credentials: true }))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 connectDb();
 
-const port = process.env.PORT || 6000;
+const port = process.env.PORT || 4444;
 
 app.use("/api/scan", require("./routes/scanRoutes"));
 app.use("/api/", require("./routes/miscelleanousRoutes"));
