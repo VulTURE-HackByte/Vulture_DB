@@ -27,14 +27,20 @@ const registerUser = asyncHandler(async (req, res) => {
   user = await user.save();
 
   if (user) {
-    res.status(201).json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      token: generateToken(user._id),
-    });
+    let Token = generateToken(user._id);
+    res
+      .status(201)
+      .json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        token: Token,
+      })
+      .cookie("token", Token, {
+        httpOnly: true,
+      });
   } else {
-    res.status(400);
+    res.status(400).clearCookie("token");
     throw new Error("invalid user data");
   }
 });
@@ -47,14 +53,20 @@ const loginUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({ email });
 
   if (user && (await bcrypt.compare(password, user.password))) {
-    res.status(200).json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      token: generateToken(user._id),
-    });
+    let Token = generateToken(user._id);
+    res
+      .status(200)
+      .json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        token: Token,
+      })
+      .cookie("token", Token, {
+        httpOnly: true,
+      });
   } else {
-    res.status(400);
+    res.status(400).clearCookie("token");
     throw new Error("Invalid credentials!");
   }
 });
