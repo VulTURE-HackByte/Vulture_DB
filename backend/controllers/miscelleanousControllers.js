@@ -23,7 +23,7 @@ const getGenerateText = asyncHandler(async (req, res) => {
   const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
   const prompt = "I am a beginner cybersecurity enthusiast help me summarize this Output only the name, simple description, criticality and give some suggestions.Make sure to give output in form of a report not a table. Make sure the output contains the confidence level as well. The following is the response:";
-  const o_report = ;
+  const o_report = "";
   const result = await model.generateContent(prompt.concat(o_report));
   const response = await result.response;
   const text = response.text();

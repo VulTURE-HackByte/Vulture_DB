@@ -8,7 +8,8 @@ const axios = require("axios");
 // route /api/scan/spyder
 // public
 const getSpiderScans = asyncHandler(async (req, res) => {
-  const zapSpiderURL = ""; // use zap spyder urls
+  let targetBody = req.body;
+  const zapSpiderURL = `http://localhost:5000/spider?target=${targetBody.target}`; // use zap spyder urls
 
   axios
     .get(zapSpiderURL)
@@ -27,33 +28,17 @@ const getSpiderScans = asyncHandler(async (req, res) => {
     });
 });
 
-
 // get passive scan
 // route /api/scan/passive
 // public
 const getPassiveScans = asyncHandler(async (req, res) => {
-  const zapPassiveURL = ""; // use zap passive url
+  let targetBody = req.body.target;
+  const zapPassiveURL = `http://localhost:5000/passive?target=${targetBody}/`; // use zap passive url
 
   axios
     .get(zapPassiveURL)
     .then(async (response) => {
-      const scanPassiveRes = [];
-    
-      const filterResponse = () => {
-        response.data.alerts.forEach((element) => {
-          let obj = {
-            name: element.name,
-            risk: element.risk,
-            confidence: element.confidence,
-          };
-
-          scanPassiveRes.push(obj);
-        });
-
-        return scanPassiveRes;
-      };
-
-      filterResponse();
+      const scanPassiveRes = response.data;
 
       const passive = await Scans.create({
         user: req.user._id,

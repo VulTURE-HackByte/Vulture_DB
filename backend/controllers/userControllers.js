@@ -36,9 +36,9 @@ const registerUser = asyncHandler(async (req, res) => {
         email: user.email,
         token: Token,
       })
-      .cookie("token", Token, {
-        httpOnly: true,
-      });
+      // .cookie("token", Token, {
+      //   httpOnly: true,
+      // });
   } else {
     res.status(400).clearCookie("token");
     throw new Error("invalid user data");
@@ -62,9 +62,9 @@ const loginUser = asyncHandler(async (req, res) => {
         email: user.email,
         token: Token,
       })
-      .cookie("token", Token, {
-        httpOnly: true,
-      });
+      // .cookie("token", Token, {
+      //   httpOnly: true,
+      // });
   } else {
     res.status(400).clearCookie("token");
     throw new Error("Invalid credentials!");

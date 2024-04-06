@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 const passiveScanSubSchema = mongoose.Schema({
-    name: String,
-    risk: String,
+    alert: String,
     confidence: String,
+    risk: String,
   });
 const scanSchema = mongoose.Schema(
   {
