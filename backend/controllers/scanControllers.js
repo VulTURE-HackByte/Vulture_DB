@@ -7,20 +7,20 @@ const axios = require("axios");
 // get sypder scan
 // route /api/scan/spyder
 // public
-const getSpyderScans = asyncHandler(async (req, res) => {
-  const zapSpyderURL = ""; // use zap spyder urls
+const getSpiderScans = asyncHandler(async (req, res) => {
+  const zapSpiderURL = ""; // use zap spyder urls
 
   axios
-    .get(zapSpyderURL)
+    .get(zapSpiderURL)
     .then(async (response) => {
-      const scanSypderRes = response.data;
+      const scanSpiderRes = response.data;
 
       const spyder = await Scans.create({
         user: req.user._id,
-        spyderRes: scanSypderRes.result,
+        spyderRes: scanSpiderRes.result,
       });
 
-      res.json(spyder).status(200);
+      res.json(spider).status(200);
     })
     .catch((error) => {
       console.error("Error fetching data:", error);
@@ -67,4 +67,4 @@ const getPassiveScans = asyncHandler(async (req, res) => {
     });
 });
 
-module.exports={getSpyderScans, getPassiveScans}
+module.exports={getSpiderScans, getPassiveScans}
