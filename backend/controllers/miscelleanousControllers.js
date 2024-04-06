@@ -5,6 +5,15 @@ const User = require("../models/userModel");
 const axios = require("axios");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
+// get user history
+// route /api/history/
+// private
+
+const getHistory = asyncHandler(async (req, res) => {
+  const scans=await Scans.find({user:req.user._id});
+  res.json(scans).status(200);
+});
+
 // get generate text
 // route /api/generate/
 // public
@@ -22,4 +31,4 @@ const getGenerateText = asyncHandler(async (req, res) => {
   res.json(text).status(200);
 });
 
-module.exports = { getGenerateText };
+module.exports = { getGenerateText, getHistory };
