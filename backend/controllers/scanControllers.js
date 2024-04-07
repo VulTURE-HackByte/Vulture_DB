@@ -33,7 +33,7 @@ const getSpiderScans = asyncHandler(async (req, res) => {
 // public
 const getPassiveScans = asyncHandler(async (req, res) => {
   let targetBody = req.body.target;
-  const zapPassiveURL = `h3.110.105.48/passive?target=${targetBody}/`; // use zap passive url
+  const zapPassiveURL = `3.110.105.48/passive?target=${targetBody}/`; // use zap passive url
 
   axios
     .get(zapPassiveURL)
