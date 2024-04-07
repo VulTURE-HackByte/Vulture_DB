@@ -13,7 +13,7 @@ const scanSchema = mongoose.Schema(
         ref: "User",
       },
     spiderRes: {
-      type: {String},
+      type: [String],
       default: null,
     },
     passiveRes: {

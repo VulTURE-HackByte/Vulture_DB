@@ -16,9 +16,9 @@ const getSpiderScans = asyncHandler(async (req, res) => {
     .then(async (response) => {
       const scanSpiderRes = response.data;
 
-      const spyder = await Scans.create({
+      const spider = await Scans.create({
         user: req.user._id,
-        spyderRes: scanSpiderRes.result,
+        spiderRes: scanSpiderRes.result,
       });
 
       res.json(spider).status(200);
@@ -46,6 +46,7 @@ const getPassiveScans = asyncHandler(async (req, res) => {
       });
 
       res.json(passive).status(200);
+
     })
     .catch((error) => {
       console.error("Error fetching data:", error);
