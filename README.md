@@ -1,4 +1,4 @@
-# Vulture_DB for VulTURE
+# Database for VulTURE
 
 Welcome to the database repository for VulTURE! This repository contains configurations and scripts related to our MongoDB Atlas database. Below you'll find useful information on how to contribute to this repository and manage database-related tasks.
 
