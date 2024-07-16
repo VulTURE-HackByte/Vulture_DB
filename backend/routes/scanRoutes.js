@@ -7,3 +7,4 @@ router.route("/spider").post( protect, getSpiderScans)
 router.route("/passive").post(protect, getPassiveScans)
 
 module.exports = router;
+ 

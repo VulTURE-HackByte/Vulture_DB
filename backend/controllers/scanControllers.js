@@ -9,7 +9,7 @@ const axios = require("axios");
 // public
 const getSpiderScans = asyncHandler(async (req, res) => {
   let targetBody = req.body;
-  const zapSpiderURL = `3.110.105.48/spider?target=${targetBody.target}`; // use zap spyder urls
+  const zapSpiderURL = `http://localhost:5000/spider?target=${targetBody.target}`; // use zap spyder urls
 
   axios
     .get(zapSpiderURL)
@@ -33,7 +33,7 @@ const getSpiderScans = asyncHandler(async (req, res) => {
 // public
 const getPassiveScans = asyncHandler(async (req, res) => {
   let targetBody = req.body.target;
-  const zapPassiveURL = `3.110.105.48/passive?target=${targetBody}/`; // use zap passive url
+  const zapPassiveURL = `http://localhost:5000/passive?target=${targetBody}/`; // use zap passive url
 
   axios
     .get(zapPassiveURL)
